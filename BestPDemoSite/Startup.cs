@@ -79,14 +79,16 @@ namespace BlankSiteCore
             app.UseAuthentication();
             // app.UseAuthorization();
 
+            app.UseHttpsRedirection();
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.Kentico().MapRoutes();
 
-                endpoints.MapGet("/", async context =>
-                {
-                    await context.Response.WriteAsync("The site has not been configured yet.");
-                });
+                //endpoints.MapGet("/", async context =>
+                //{
+                //    await context.Response.WriteAsync("The site has not been configured yet.");
+                //});
             });
         }
     }
