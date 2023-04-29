@@ -1,5 +1,6 @@
 using Kentico.Content.Web.Mvc;
 using Kentico.Content.Web.Mvc.Routing;
+using Kentico.PageBuilder.Web.Mvc;
 using Kentico.Web.Mvc;
 
 using Microsoft.AspNetCore.Builder;
@@ -28,14 +29,14 @@ namespace BlankSiteCore
             // Enable desired Kentico Xperience features
             var kenticoServiceCollection = services.AddKentico(features =>
             {
-                // features.UsePageBuilder();
+                 features.UsePageBuilder();
                 // features.UseActivityTracking();
                 // features.UseABTesting();
                 // features.UseWebAnalytics();
                 // features.UseEmailTracking();
                 // features.UseCampaignLogger();
                 // features.UseScheduler();
-                // features.UsePageRouting();
+                 features.UsePageRouting();
             });
 
             if (Environment.IsDevelopment())

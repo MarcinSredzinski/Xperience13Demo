@@ -11,5 +11,9 @@
     <PackageReference Include="kentico.xperience.aspnetcore.webapp" Version="13.0.104" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Models\Generated\" />
+  </ItemGroup>
+
 </Project>
 
