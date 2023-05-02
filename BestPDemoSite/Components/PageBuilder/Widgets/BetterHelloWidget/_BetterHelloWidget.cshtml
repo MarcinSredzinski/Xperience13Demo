@@ -1,10 +1,12 @@
 ﻿@using System.Net.Http;
 @using System.Net.Http.Json;
+@using BestPDemoSite.Components.PageBuilder.Widgets.BetterHelloWidget;
 @using BestPDemoSite.WeatherStack;
 @using CMS.CustomTables;
 @using CMS.DataEngine;
-@using System.Linq
+@using System.Linq;
 
+@model BetterHelloWidgetViewModel
 @{    
     string customTableClassName = "demo.CityName";
     DataClassInfo customTable = DataClassInfoProvider.GetDataClassInfo(customTableClassName);
@@ -12,7 +14,7 @@
     string temperatureForCities = "";
 }
 
-@Model.Properties.WelcomeText
+@Model.HelloText
 <br/>
 
 @foreach (string city in cityNames)

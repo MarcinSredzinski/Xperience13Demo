@@ -1,4 +1,5 @@
 ﻿//DocSection:ExampleWidget
+using BestPDemoSite.Components.PageBuilder.Widgets.BetterHelloWidget;
 using BestPDemoSite.Components.PageBuilder.Widgets.HelloWidget;
 using BestPDemoSite.Components.PageBuilder.Widgets.NumberWidget;
 using Kentico.PageBuilder.Web.Mvc;
@@ -22,7 +23,8 @@ using Kentico.PageBuilder.Web.Mvc;
 //DocSection:HelloWidget
 
 [assembly: RegisterWidget("BestPDemoSite.Widgets.BetterHelloWidget",
+                         typeof(BetterHelloWidgetViewComponent),
                          "Better Hello widget",
-                         typeof(BetterHelloWidgetProperties),
-                         customViewName: "~/Components/PageBuilder/Widgets/BetterHelloWidget/_BetterHelloWidget.cshtml")]
+                         //customViewName: "~/Components/PageBuilder/Widgets/BetterHelloWidget/_BetterHelloWidget.cshtml",
+                         typeof(BetterHelloWidgetProperties))]
 //EndDocSection:HelloWidget
