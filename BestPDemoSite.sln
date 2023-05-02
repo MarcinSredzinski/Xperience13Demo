@@ -4,7 +4,7 @@ VisualStudioVersion = 17.5.33530.505
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BestPDemoSite", "BestPDemoSite\BestPDemoSite.csproj", "{63D30D64-685D-4D4D-87F8-19EF89D42156}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoCustomCode", "DemoCustomCode\DemoCustomCode.csproj", "{FB4F42E5-73CF-4065-8271-416B3E1442E5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DemoCustomCode", "DemoCustomCode\DemoCustomCode.csproj", "{FB4F42E5-73CF-4065-8271-416B3E1442E5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

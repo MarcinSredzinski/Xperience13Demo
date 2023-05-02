@@ -1,0 +1,30 @@
+﻿@using System.Net.Http;
+@using System.Net.Http.Json;
+@using BestPDemoSite.WeatherStack;
+@using CMS.CustomTables;
+@using CMS.DataEngine;
+@using System.Linq
+
+@{    
+    string customTableClassName = "demo.CityName";
+    DataClassInfo customTable = DataClassInfoProvider.GetDataClassInfo(customTableClassName);
+    var cityNames = CustomTableItemProvider.GetItems<CMS.CustomTables.Types.Demo.CityNameItem>().Columns("CityName").Select(c => c.CityName).ToList();
+    string temperatureForCities = "";
+}
+
+@Model.Properties.WelcomeText
+<br/>
+
+@foreach (string city in cityNames)
+{
+    var httpClient = new HttpClient();
+    var baseAddress = SettingsKeyInfoProvider.GetValue("WeatherstackApiBaseUrl");
+    var apiKey = SettingsKeyInfoProvider.GetValue("WeatherstackApiKey");
+    httpClient.BaseAddress = new Uri("http://api.weatherstack.com/");
+    var response = await httpClient.GetAsync(($"current?access_key={apiKey}&query={city}"));
+    var weather = await response.Content.ReadFromJsonAsync<WeatherForecast>();
+
+    temperatureForCities += $"Temperature for: {city} is {weather?.Current?.Temperature} <br />";
+}
+
+@Html.Raw(temperatureForCities)
