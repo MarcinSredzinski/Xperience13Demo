@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <PackageReference Include="kentico.xperience.aspnetcore.webapp" Version="13.0.104" />
+    <PackageReference Include="Sentry.AspNetCore" Version="3.31.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -17,6 +18,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DemoCustomCode\DemoCustomCode.csproj" />
+    <ProjectReference Include="..\DemoDomainObjects\DemoDomainObjects.csproj" />
     <ProjectReference Include="..\DemoKenticoCode\DemoKenticoCode.csproj" />
   </ItemGroup>
 

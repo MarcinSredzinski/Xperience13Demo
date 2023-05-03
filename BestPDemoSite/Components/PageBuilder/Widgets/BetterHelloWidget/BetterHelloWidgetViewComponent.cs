@@ -1,7 +1,8 @@
 ﻿using BestPDemoSite.Components.PageBuilder.Widgets.HelloWidget;
+using CMS.Core;
 using CMS.CustomTables;
 using CMS.DataEngine;
-using DemoCustomCode.Models.WeatherStack;
+using DemoDomainObjects.Models.WeatherStack;
 using Kentico.PageBuilder.Web.Mvc;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
@@ -47,7 +48,7 @@ namespace BestPDemoSite.Components.PageBuilder.Widgets.BetterHelloWidget
                 var apiKey = SettingsKeyInfoProvider.GetValue("WeatherstackApiKey");
                 var response = await _httpClient.GetAsync(($"current?access_key={apiKey}&query={city}"));
                 var weather = await response.Content.ReadFromJsonAsync<WeatherForecast>();
-
+                Service.Resolve<IEventLogService>().LogInformation("HelloWidget", "WeatherForecast", "Weather forecast downloaded");
                 temperatureForCities += $"Temperature for: {city} is {weather?.Current?.Temperature} <br />";
             }
             return temperatureForCities;
