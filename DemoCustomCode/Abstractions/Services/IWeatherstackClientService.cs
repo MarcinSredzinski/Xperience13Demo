@@ -1,4 +1,4 @@
-﻿using DemoCustomCode.Models.WeatherStack;
+﻿using DemoDomainObjects.Models.WeatherStack;
 
 namespace DemoCustomCode.Abstractions.Services;
 

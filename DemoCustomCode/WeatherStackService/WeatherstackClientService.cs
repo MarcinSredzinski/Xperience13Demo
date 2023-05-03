@@ -1,12 +1,12 @@
 ﻿using DemoCustomCode.Abstractions.Providers;
-using DemoCustomCode.Models.WeatherStack;
+using DemoDomainObjects.Models.WeatherStack;
 using Microsoft.Extensions.Caching.Memory;
 using Polly;
 using Polly.CircuitBreaker;
 using Polly.Extensions.Http;
 using System.Net.Http.Json;
 
-namespace DemoCustomCode.WeatherStackService;
+namespace DemoCustomCode.WeatherstackService;
 
 public class WeatherstackClientService
 {
