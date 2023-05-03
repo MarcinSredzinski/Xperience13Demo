@@ -1,8 +1,13 @@
+using DemoCustomCode.Abstractions.Providers;
+using DemoCustomCode.Abstractions.Services;
+using DemoCustomCode.WeatherstackService;
+using DemoCustomCode.Widgets;
+using DemoKenticoCode.Providers.CustomTable;
+using DemoKenticoCode.Providers.Settings;
 using Kentico.Content.Web.Mvc;
 using Kentico.Content.Web.Mvc.Routing;
 using Kentico.PageBuilder.Web.Mvc;
 using Kentico.Web.Mvc;
-
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
@@ -60,6 +65,10 @@ namespace BlankSiteCore
             {
                 client.BaseAddress = new Uri("http://api.weatherstack.com/");
             });
+            services.AddScoped<ISettingsProvider, KenticoSettingsProvider>();
+            services.AddScoped<ITableDataProvider, KenticoCustomTableProvider>();
+            services.AddScoped<IWeatherstackClientService, WeatherstackClientService>();
+            services.AddScoped<IFinalHelloWidgetService, FinalHelloWidgetService>();
 
             services.AddControllersWithViews();
         }

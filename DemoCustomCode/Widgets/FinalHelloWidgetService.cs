@@ -1,25 +1,52 @@
-﻿using DemoCustomCode.Abstractions.Providers;
+﻿using CMS.Core;
+using DemoCustomCode.Abstractions.Providers;
+using DemoCustomCode.Abstractions.Services;
 using DemoDomainObjects.Models.Widgets.Properties;
+using DemoDomainObjects.Models.Widgets.ViewModels;
+using System.Text;
 
-namespace DemoCustomCode.Widgets
+namespace DemoCustomCode.Widgets;
+
+public class FinalHelloWidgetService : IFinalHelloWidgetService
 {
-    public class FinalHelloWidgetService
+    private const string CustomTableClassName = "demo.CityName";
+    private const string CustomTableColumnName = "CityName";
+    private readonly ITableDataProvider _tableDataProvider;
+    private readonly IWeatherstackClientService _weatherstackClientService;
+    private readonly IEventLogService _eventLogService;
+
+    public FinalHelloWidgetService(ITableDataProvider tableDataProvider, IWeatherstackClientService weatherstackClientService, IEventLogService eventLogService)
     {
-        private readonly ITableDataProvider _tableDataProvider;
-        private const string CustomTableClassName = "demo.CityName";
-        private const string CustomTableColumnName = "CityName";
+        _tableDataProvider = tableDataProvider;
+        _weatherstackClientService = weatherstackClientService;
+        _eventLogService = eventLogService;
+    }
 
+    public async Task<FinalHelloWidgetViewModel> GetWidget(FinalHelloWidgetProperties properties)
+    {
+        //Get cities
+        var cities = _tableDataProvider.GetValuesFromColumn<CMS.CustomTables.Types.Demo.CityNameItem>(CustomTableClassName,
+                        CustomTableColumnName, c => c.CityName);
+        //Get data from properties and do operations on them
+        var viewModel = new FinalHelloWidgetViewModel();
+        viewModel.HelloText = properties.WelcomeText + " And some more text";
+        //Get weather data + log that the data was loaded
+        viewModel.WeatherInfo = await GenerateWeatherInfo(cities);
+        _eventLogService.LogWarning("FinalHelloWidgetService", "WidgetGeneration", "Widget generated properly");
+        return viewModel;
+    }
 
-        public object GetWidget(FinalHelloWidgetProperties properties)
+    private async Task<string> GenerateWeatherInfo(IEnumerable<string>? cities)
+    {
+        if (cities == null || !cities.Any())
+            return "";
+
+        StringBuilder weatherData = new StringBuilder();
+        foreach (var city in cities)
         {
-            //Get cities
-            var cities = _tableDataProvider.GetValuesFromColumn<CMS.CustomTables.Types.Demo.CityNameItem>(CustomTableClassName,
-                            CustomTableColumnName, c => c.CityName);
-            //Get data from properties and do operations on them
-
-            //Get weather data + log that the data was loaded
-            //Combine into one object
-            return new();
+            var weather = await _weatherstackClientService.GetCurrentWeatherForCity(city);
+            weatherData.AppendLine($"Temperature for: {city} is {weather?.Current?.Temperature} <br/>");
         }
+        return weatherData.ToString();
     }
 }

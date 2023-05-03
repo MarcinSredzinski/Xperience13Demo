@@ -16,7 +16,7 @@ namespace BestPDemoSite.Kentico.EventLogWriters
         {
             if (eventLogData.EventType > EventTypeEnum.Information)
             {
-                SentrySdk.CaptureMessage("Hello Sentry from Event log writer" + eventLogData.EventDescription);
+              //  SentrySdk.CaptureMessage("Hello Sentry from Event log writer" + eventLogData.EventDescription);
             }
         }
     }

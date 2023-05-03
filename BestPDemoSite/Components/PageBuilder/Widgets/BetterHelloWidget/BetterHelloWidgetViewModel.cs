@@ -1,4 +1,4 @@
-﻿namespace BestPDemoSite.Components.PageBuilder.Widgets.BetterHelloWidget
+﻿namespace BestPDemoSite.Components.PageBuilder.Widgets.FinalHelloWidget
 {
     public class BetterHelloWidgetViewModel
     {

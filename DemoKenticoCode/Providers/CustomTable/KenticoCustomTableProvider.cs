@@ -4,7 +4,7 @@ using DemoCustomCode.Abstractions.Providers;
 
 namespace DemoKenticoCode.Providers.CustomTable;
 
-internal class KenticoCustomTableProvider : ITableDataProvider
+public class KenticoCustomTableProvider : ITableDataProvider
 {
     public IEnumerable<string> GetValuesFromColumn<T>(string customTableClassName, string columnName,
                                                 Func<T, string> selector) where T : CustomTableItem, new()

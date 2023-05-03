@@ -1,7 +1,8 @@
 ﻿//DocSection:ExampleWidget
-using BestPDemoSite.Components.PageBuilder.Widgets.BetterHelloWidget;
+using BestPDemoSite.Components.PageBuilder.Widgets.FinalHelloWidget;
 using BestPDemoSite.Components.PageBuilder.Widgets.HelloWidget;
 using BestPDemoSite.Components.PageBuilder.Widgets.NumberWidget;
+using DemoDomainObjects.Models.Widgets.Properties;
 using Kentico.PageBuilder.Web.Mvc;
 
 [assembly: RegisterWidget("LearningKit.Widgets.NumberWidget",
@@ -20,11 +21,21 @@ using Kentico.PageBuilder.Web.Mvc;
 //EndDocSection:HelloWidget
 
 
-//DocSection:HelloWidget
+//DocSection:BetterHelloWidget
 
 [assembly: RegisterWidget("BestPDemoSite.Widgets.BetterHelloWidget",
                          typeof(BetterHelloWidgetViewComponent),
                          "Better Hello widget",
                          //customViewName: "~/Components/PageBuilder/Widgets/BetterHelloWidget/_BetterHelloWidget.cshtml",
                          typeof(BetterHelloWidgetProperties))]
-//EndDocSection:HelloWidget
+//EndDocSection:BetterHelloWidget
+
+
+//DocSection:FinalHelloWidget
+
+[assembly: RegisterWidget("BestPDemoSite.Widgets.FinalHelloWidget",
+                         typeof(FinalHelloWidgetViewComponent),
+                         "Final Hello widget",
+                         //customViewName: "~/Components/PageBuilder/Widgets/BetterHelloWidget/_BetterHelloWidget.cshtml",
+                         typeof(FinalHelloWidgetProperties))]
+//EndDocSection:FinalHelloWidget

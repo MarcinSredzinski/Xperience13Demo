@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <PackageReference Include="Kentico.Xperience.AspNetCore.WebApp" Version="13.0.104" />
+    <PackageReference Include="Kentico.Xperience.Libraries" Version="13.0.104" />
   </ItemGroup>
 
 </Project>

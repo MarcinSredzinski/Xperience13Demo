@@ -1,4 +1,6 @@
-﻿using DemoCustomCode.Abstractions.Providers;
+﻿using CMS.Core;
+using DemoCustomCode.Abstractions.Providers;
+using DemoCustomCode.Abstractions.Services;
 using DemoDomainObjects.Models.WeatherStack;
 using Microsoft.Extensions.Caching.Memory;
 using Polly;
@@ -8,7 +10,7 @@ using System.Net.Http.Json;
 
 namespace DemoCustomCode.WeatherstackService;
 
-public class WeatherstackClientService
+public class WeatherstackClientService : IWeatherstackClientService
 {
     private const string SettingsKeyName = "WeatherstackApiKey";
     private readonly IHttpClientFactory _httpClientFactory;
@@ -20,17 +22,19 @@ public class WeatherstackClientService
         .AdvancedCircuitBreakerAsync(0.5, TimeSpan.FromSeconds(10),
                 10, TimeSpan.FromSeconds(15));
     private readonly IMemoryCache _weatherCache = new MemoryCache(new MemoryCacheOptions());
+    private readonly IEventLogService _eventLogService;
 
 
-    public WeatherstackClientService(IHttpClientFactory httpClientFactory, ISettingsProvider settingsProvider)
+    public WeatherstackClientService(IHttpClientFactory httpClientFactory, ISettingsProvider settingsProvider, IEventLogService eventLogService)
     {
         _httpClientFactory = httpClientFactory;
         _apiKey = settingsProvider.GetValue(SettingsKeyName);
+        _eventLogService = eventLogService;
     }
 
     public async Task<WeatherForecast?> GetCurrentWeatherForCity(string cityName)
     {
-        var client = _httpClientFactory.CreateClient("weatherClient");
+        var client = _httpClientFactory.CreateClient("weatherStackHttpClient");
 
         if (_circuitBreakerPolicy.CircuitState is CircuitState.Open or CircuitState.Isolated)
         {

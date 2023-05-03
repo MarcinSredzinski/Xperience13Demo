@@ -11,7 +11,7 @@ using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
 
-namespace BestPDemoSite.Components.PageBuilder.Widgets.BetterHelloWidget
+namespace BestPDemoSite.Components.PageBuilder.Widgets.FinalHelloWidget
 {
     public class BetterHelloWidgetViewComponent : ViewComponent
     {
@@ -48,7 +48,7 @@ namespace BestPDemoSite.Components.PageBuilder.Widgets.BetterHelloWidget
                 var apiKey = SettingsKeyInfoProvider.GetValue("WeatherstackApiKey");
                 var response = await _httpClient.GetAsync(($"current?access_key={apiKey}&query={city}"));
                 var weather = await response.Content.ReadFromJsonAsync<WeatherForecast>();
-                Service.Resolve<IEventLogService>().LogInformation("HelloWidget", "WeatherForecast", "Weather forecast downloaded");
+                Service.Resolve<IEventLogService>().LogInformation("BetterHelloWidget", "WeatherForecast", "Weather forecast downloaded");
                 temperatureForCities += $"Temperature for: {city} is {weather?.Current?.Temperature} <br />";
             }
             return temperatureForCities;
