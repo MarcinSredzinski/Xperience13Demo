@@ -7,7 +7,7 @@ namespace DemoKenticoCode.Providers.CustomTable;
 internal class KenticoCustomTableProvider : ITableDataProvider
 {
     public IEnumerable<string> GetValuesFromColumn<T>(string customTableClassName, string columnName,
-                                                Func<System.Data.DataRow, string> selector) where T : CustomTableItem, new()
+                                                Func<T, string> selector) where T : CustomTableItem, new()
     {
         DataClassInfo customTable = DataClassInfoProvider.GetDataClassInfo(customTableClassName);
         if (customTable == null)

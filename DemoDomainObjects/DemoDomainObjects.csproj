@@ -10,9 +10,4 @@
     <PackageReference Include="Kentico.Xperience.AspNetCore.WebApp" Version="13.0.104" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\DemoCustomCode\DemoCustomCode.csproj" />
-    <ProjectReference Include="..\DemoDomainObjects\DemoDomainObjects.csproj" />
-  </ItemGroup>
-
 </Project>

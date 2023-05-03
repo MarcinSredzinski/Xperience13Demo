@@ -8,6 +8,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DemoCustomCode", "DemoCusto
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoKenticoCode", "DemoKenticoCode\DemoKenticoCode.csproj", "{F540C90E-2128-4DEC-B195-3EB0742A6FC0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoDomainObjects", "DemoDomainObjects\DemoDomainObjects.csproj", "{9B858C00-4218-4118-8C91-9CDB76541EB5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -26,6 +28,10 @@ Global
 		{F540C90E-2128-4DEC-B195-3EB0742A6FC0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F540C90E-2128-4DEC-B195-3EB0742A6FC0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F540C90E-2128-4DEC-B195-3EB0742A6FC0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9B858C00-4218-4118-8C91-9CDB76541EB5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9B858C00-4218-4118-8C91-9CDB76541EB5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9B858C00-4218-4118-8C91-9CDB76541EB5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9B858C00-4218-4118-8C91-9CDB76541EB5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
