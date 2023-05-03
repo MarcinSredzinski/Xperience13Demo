@@ -1,9 +1,10 @@
 ﻿using CMS.CustomTables;
 using CMS.DataEngine;
+using DemoCustomCode.Abstractions.Providers;
 
 namespace DemoKenticoCode.Providers.CustomTable;
 
-internal class KenticoCustomTableProvider
+internal class KenticoCustomTableProvider : ITableDataProvider
 {
     public IEnumerable<string> GetValuesFromColumn<T>(string customTableClassName, string columnName,
                                                 Func<System.Data.DataRow, string> selector) where T : CustomTableItem, new()

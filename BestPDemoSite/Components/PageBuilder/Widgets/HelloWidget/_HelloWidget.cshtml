@@ -4,6 +4,7 @@
 @using CMS.CustomTables;
 @using CMS.DataEngine;
 @using System.Linq;
+@using CMS.EventLog;
 @using DemoCustomCode.Models.WeatherStack;
 @using Kentico.PageBuilder.Web.Mvc;
 
@@ -27,7 +28,7 @@
     httpClient.BaseAddress = new Uri("http://api.weatherstack.com/");
     var response = await httpClient.GetAsync(($"current?access_key={apiKey}&query={city}"));
     var weather = await response.Content.ReadFromJsonAsync<WeatherForecast>();
-
+    EventLogProvider.LogInformation("HelloWidget", "WeatherForecast", "Weather forecast downloaded");
     temperatureForCities += $"Temperature for: {city} is {weather?.Current?.Temperature} <br />";
 }
 
