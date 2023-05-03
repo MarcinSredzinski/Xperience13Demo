@@ -5,9 +5,9 @@ using Kentico.Web.Mvc;
 
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System;
 
 namespace BlankSiteCore
 {
@@ -29,14 +29,14 @@ namespace BlankSiteCore
             // Enable desired Kentico Xperience features
             var kenticoServiceCollection = services.AddKentico(features =>
             {
-                 features.UsePageBuilder();
+                features.UsePageBuilder();
                 // features.UseActivityTracking();
                 // features.UseABTesting();
                 // features.UseWebAnalytics();
                 // features.UseEmailTracking();
                 // features.UseCampaignLogger();
                 // features.UseScheduler();
-                 features.UsePageRouting();
+                features.UsePageRouting();
             });
 
             if (Environment.IsDevelopment())
@@ -56,6 +56,10 @@ namespace BlankSiteCore
 
             services.AddAuthentication();
             // services.AddAuthorization();
+            services.AddHttpClient("weatherStackHttpClient", client =>
+            {
+                client.BaseAddress = new Uri("http://api.weatherstack.com/");
+            });
 
             services.AddControllersWithViews();
         }

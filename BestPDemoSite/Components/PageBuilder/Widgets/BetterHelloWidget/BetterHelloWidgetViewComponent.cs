@@ -1,10 +1,11 @@
 ﻿using BestPDemoSite.Components.PageBuilder.Widgets.HelloWidget;
 using BestPDemoSite.WeatherStack;
+using CMS.CustomTables;
 using CMS.DataEngine;
 using Kentico.PageBuilder.Web.Mvc;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
@@ -13,11 +14,28 @@ namespace BestPDemoSite.Components.PageBuilder.Widgets.BetterHelloWidget
 {
     public class BetterHelloWidgetViewComponent : ViewComponent
     {
+        private readonly HttpClient _httpClient;
+        public BetterHelloWidgetViewComponent(IHttpClientFactory httpClientFactory)
+        {
+            _httpClient = httpClientFactory.CreateClient("weatherStackHttpClient");
+        }
         public async Task<IViewComponentResult> InvokeAsync(ComponentViewModel<BetterHelloWidgetProperties> properties)
         {
+            var cityNames = GetCitiesListFromCustomTable();
+            var weatherInfo = await GetWeatherInfoForCountries(cityNames);
             var viewModel = new BetterHelloWidgetViewModel();
-            viewModel.HelloText = properties.Properties.WelcomeText + " Mordeczki";
+            viewModel.HelloText = properties.Properties.WelcomeText + " And some more text";
+            viewModel.WeatherInfo = weatherInfo;
             return View("~/Components/PageBuilder/Widgets/BetterHelloWidget/_BetterHelloWidget.cshtml", viewModel);
+        }
+
+        private List<string> GetCitiesListFromCustomTable()
+        {
+            string customTableClassName = "demo.CityName";
+            DataClassInfo customTable = DataClassInfoProvider.GetDataClassInfo(customTableClassName);
+            var cityNames = CustomTableItemProvider.GetItems<CMS.CustomTables.Types.Demo.CityNameItem>()
+                                                   .Columns("CityName").Select(c => c.CityName).ToList();
+            return cityNames;
         }
 
         private async Task<string> GetWeatherInfoForCountries(List<string> cityNames)
@@ -25,11 +43,9 @@ namespace BestPDemoSite.Components.PageBuilder.Widgets.BetterHelloWidget
             string temperatureForCities = "";
             foreach (string city in cityNames)
             {
-                var httpClient = new HttpClient();
                 var baseAddress = SettingsKeyInfoProvider.GetValue("WeatherstackApiBaseUrl");
                 var apiKey = SettingsKeyInfoProvider.GetValue("WeatherstackApiKey");
-                httpClient.BaseAddress = new Uri(baseAddress);
-                var response = await httpClient.GetAsync(($"current?access_key={apiKey}&query={city}"));
+                var response = await _httpClient.GetAsync(($"current?access_key={apiKey}&query={city}"));
                 var weather = await response.Content.ReadFromJsonAsync<WeatherForecast>();
 
                 temperatureForCities += $"Temperature for: {city} is {weather?.Current?.Temperature} <br />";

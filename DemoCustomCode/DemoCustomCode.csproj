@@ -10,4 +10,8 @@
     <PackageReference Include="Kentico.Xperience.AspNetCore.WebApp" Version="13.0.104" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="WeatherStackService\" />
+  </ItemGroup>
+
 </Project>

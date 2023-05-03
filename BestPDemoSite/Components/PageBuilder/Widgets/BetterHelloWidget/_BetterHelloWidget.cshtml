@@ -7,26 +7,8 @@
 @using System.Linq;
 
 @model BetterHelloWidgetViewModel
-@{    
-    string customTableClassName = "demo.CityName";
-    DataClassInfo customTable = DataClassInfoProvider.GetDataClassInfo(customTableClassName);
-    var cityNames = CustomTableItemProvider.GetItems<CMS.CustomTables.Types.Demo.CityNameItem>().Columns("CityName").Select(c => c.CityName).ToList();
-    string temperatureForCities = "";
-}
 
 @Model.HelloText
 <br/>
 
-@foreach (string city in cityNames)
-{
-    var httpClient = new HttpClient();
-    var baseAddress = SettingsKeyInfoProvider.GetValue("WeatherstackApiBaseUrl");
-    var apiKey = SettingsKeyInfoProvider.GetValue("WeatherstackApiKey");
-    httpClient.BaseAddress = new Uri("http://api.weatherstack.com/");
-    var response = await httpClient.GetAsync(($"current?access_key={apiKey}&query={city}"));
-    var weather = await response.Content.ReadFromJsonAsync<WeatherForecast>();
-
-    temperatureForCities += $"Temperature for: {city} is {weather?.Current?.Temperature} <br />";
-}
-
-@Html.Raw(temperatureForCities)
+@Html.Raw(Model.WeatherInfo)
