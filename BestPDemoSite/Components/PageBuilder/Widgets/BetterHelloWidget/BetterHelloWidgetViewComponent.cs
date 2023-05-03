@@ -1,7 +1,7 @@
 ﻿using BestPDemoSite.Components.PageBuilder.Widgets.HelloWidget;
-using BestPDemoSite.WeatherStack;
 using CMS.CustomTables;
 using CMS.DataEngine;
+using DemoCustomCode.Models.WeatherStack;
 using Kentico.PageBuilder.Web.Mvc;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;

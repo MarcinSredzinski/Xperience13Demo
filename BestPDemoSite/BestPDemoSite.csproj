@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DemoCustomCode\DemoCustomCode.csproj" />
+    <ProjectReference Include="..\DemoKenticoCode\DemoKenticoCode.csproj" />
   </ItemGroup>
 
 </Project>
