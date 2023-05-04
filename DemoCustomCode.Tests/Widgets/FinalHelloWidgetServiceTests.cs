@@ -1,4 +1,3 @@
-using Azure;
 using CMS.Core;
 using DemoCustomCode.Abstractions.Providers;
 using DemoCustomCode.Abstractions.Services;
@@ -7,7 +6,6 @@ using DemoDomainObjects.Models.WeatherStack;
 using DemoDomainObjects.Models.Widgets.Properties;
 using FluentAssertions;
 using Moq;
-using System.Linq.Expressions;
 
 namespace DemoCustomCode.Tests.Widgets
 {
@@ -16,7 +14,7 @@ namespace DemoCustomCode.Tests.Widgets
         FinalHelloWidgetService finalHelloWidgetService;
         Mock<ITableDataProvider> tableProviderMock;
 
-       [SetUp]
+        [SetUp]
         public void Setup()
         {
             var warsaw = "Warsaw";
@@ -43,7 +41,7 @@ namespace DemoCustomCode.Tests.Widgets
             finalHelloWidgetService = new FinalHelloWidgetService(tableProviderObject, weatherstackClientServiceObject, eventLogServiceObject);
         }
 
-        [Test]        
+        [Test]
         public void GetWidget_ShouldReturnWidgetModel()
         {
             //Arrange
@@ -54,7 +52,7 @@ namespace DemoCustomCode.Tests.Widgets
 
             //Assert
             Assert.That(result, Is.Not.Null);
-            Assert.That(result.WeatherInfo, Is.Not.Null);    
+            Assert.That(result.WeatherInfo, Is.Not.Null);
         }
         [Test]
         public void GetWidget_ResponseShouldContainTemperatureForWarsaw()
@@ -65,7 +63,7 @@ namespace DemoCustomCode.Tests.Widgets
             //Act
             var result = finalHelloWidgetService.GetWidget(widgetProperties).Result;
             //Assert
-            result.WeatherInfo.Should().Contain("Temperature for: Warsaw is 20 <br/>");       
+            result.WeatherInfo.Should().Contain("Temperature for: Warsaw is 20 <br/>");
         }
         [Test]
         public void GetWidget_ResponseShouldCallGetValuesFromColumn()
@@ -81,6 +79,6 @@ namespace DemoCustomCode.Tests.Widgets
                    (It.IsAny<string>(), It.IsAny<string>(), It.IsAny<Func<CMS.CustomTables.Types.Demo.CityNameItem, string>>()),
                       Times.Once());
         }
-       
+
     }
 }
