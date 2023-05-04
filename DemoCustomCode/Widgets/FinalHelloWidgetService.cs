@@ -24,19 +24,16 @@ public class FinalHelloWidgetService : IFinalHelloWidgetService
 
     public async Task<FinalHelloWidgetViewModel> GetWidget(FinalHelloWidgetProperties properties)
     {
-        //Get cities
         var cities = _tableDataProvider.GetValuesFromColumn<CMS.CustomTables.Types.Demo.CityNameItem>(CustomTableClassName,
                         CustomTableColumnName, c => c.CityName);
-        //Get data from properties and do operations on them
         var viewModel = new FinalHelloWidgetViewModel();
         viewModel.HelloText = properties.WelcomeText + " And some more text";
-        //Get weather data + log that the data was loaded
         viewModel.WeatherInfo = await GenerateWeatherInfo(cities);
         _eventLogService.LogWarning("FinalHelloWidgetService", "WidgetGeneration", "Widget generated properly");
         return viewModel;
     }
 
-    private async Task<string> GenerateWeatherInfo(IEnumerable<string>? cities)
+    protected virtual async Task<string> GenerateWeatherInfo(IEnumerable<string>? cities)
     {
         if (cities == null || !cities.Any())
             return "";
